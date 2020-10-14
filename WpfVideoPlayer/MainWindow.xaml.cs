@@ -43,13 +43,18 @@ namespace WpfVideoPlayer
             // 添加元素卸载完成事件 -- 停止播放
             mediaElement.Unloaded += new RoutedEventHandler(media_Unloaded);
         }
-
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            mediaElement.Width = ActualWidth;
+            mediaElement.Height = ActualHeight;
+        }
         /*
             元素事件 
         */
         private void media_Loaded(object sender, RoutedEventArgs e)
         {
             (sender as MediaElement).Play();
+            FullScreenHelper.GoFullscreen(this);
         }
 
         private void media_MediaEnded(object sender, RoutedEventArgs e)
